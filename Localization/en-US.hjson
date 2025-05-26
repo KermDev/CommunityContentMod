@@ -301,6 +301,7 @@ Mods: {
 			Lcharacter.DisplayName: Lcharacter
 			Tcharacter.DisplayName: Tcharacter
 			Ucharacter.DisplayName: Ucharacter
+			ElderBranchProj.DisplayName: Elder Branch Proj
 		}
 
 		Buffs: {
