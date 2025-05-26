@@ -41,8 +41,8 @@ namespace CCMod.Content.Items.Weapons.Ranged.ExperimentalPlasmacaster
 			Item.useStyle = ItemUseStyleID.Shoot;
 			Item.noMelee = true;
 			Item.autoReuse = false;
-			Item.value = Item.buyPrice(gold: 1);
-			Item.rare = ItemRarityID.Green;
+			Item.value = Item.sellPrice(gold: 1, silver: 50);
+			Item.rare = ItemRarityID.Pink;
 			Item.shoot = ModContent.ProjectileType<ExperimentalPlasmachargerHeld>();
 			Item.shootSpeed = 0;
 			Item.channel = true;

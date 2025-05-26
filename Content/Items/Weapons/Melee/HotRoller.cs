@@ -12,31 +12,26 @@ namespace CCMod.Content.Items.Weapons.Melee
 {
 	[CodedBy("Jon Arbuckle")]
 	[SpritedBy("Garfield")]
-	[CommonNPCDrop(NPCID.WallofFlesh, 3)]
+	[CommonNPCDrop(NPCID.WallofFlesh, 5)]
 	internal class HotRoller : ModItem
 	{
 		public override void SetDefaults()
 		{
 			Item.DamageType = DamageClass.Melee;
-			Item.damage = 62;
+			Item.damage = 42;
 			Item.useTime = 30;
 			Item.useAnimation = 30;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.noMelee = true;
 			Item.noUseGraphic = true;
 			Item.rare = ItemRarityID.Orange;
+			Item.value = Item.sellPrice(gold: 2);
 		}
 
 		public override bool CanUseItem(Player player)
 		{
 			return player.ownedProjectileCounts[ModContent.ProjectileType<HotRollerProjectile>()] <= 0;
 		}
-
-		public override void AddRecipes()
-		{
-
-		}
-
 		public override bool? UseItem(Player player)
 		{
 			Projectile.NewProjectile(Projectile.GetSource_None(), player.Center, Vector2.Zero, ModContent.ProjectileType<HotRollerProjectile>(), Item.damage, Item.knockBack, player.whoAmI);

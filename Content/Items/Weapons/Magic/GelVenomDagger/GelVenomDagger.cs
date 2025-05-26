@@ -32,14 +32,14 @@ namespace CCMod.Content.Items.Weapons.Magic.GelVenomDagger
 			Item.damage = 59;
 			Item.knockBack = 3f;
 			Item.crit = 8;
-			Item.value = 4000;
+			Item.value = Item.sellPrice(gold: 4);
 
 			Item.rare = ItemRarityID.Pink;
 
 			Item.shoot = ModContent.ProjectileType<GelVenomDaggerProjectile>();
 			Item.shootSpeed = 23;
 
-			Item.mana = 7;
+			Item.mana = 5;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.DamageType = DamageClass.Magic;
 

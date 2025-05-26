@@ -28,7 +28,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.Gunnade
 		{
 			Recipe recipe = CreateRecipe();
 			recipe.AddIngredient(ItemID.Boomstick, 1);
-			recipe.AddIngredient(ItemID.Grenade, 150);
+			recipe.AddIngredient(ItemID.Grenade, 50);
 			recipe.AddIngredient(ItemID.DemoniteBar, 15);
 			recipe.AddTile(TileID.Anvils);
 			recipe.Register();
@@ -55,6 +55,8 @@ namespace CCMod.Content.Items.Weapons.Ranged.Gunnade
 			Item.CanRollPrefix(PrefixID.Frenzying);
 			Item.CanRollPrefix(PrefixID.Hasty2); // hasty 2??
 			Item.CanRollPrefix(PrefixID.Awkward);
+			Item.rare = 2;
+			Item.value = Item.sellPrice(gold: 1);
 		}
 	}
 }

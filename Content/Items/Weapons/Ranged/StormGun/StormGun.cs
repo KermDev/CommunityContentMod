@@ -11,8 +11,9 @@ using Terraria.ModLoader;
 
 namespace CCMod.Content.Items.Weapons.Ranged.StormGun
 {
-	[ConceptBy("LowQualityTrashXinim")]
+	[CodedBy("LowQualityTrash-Xinim")]
 	[SpritedBy("mayhemmm")]
+	[ConceptBy("LowQualityTrashXinim")]
 	internal class StormGun : ModItem
 	{
 		public override void SetStaticDefaults()
@@ -32,7 +33,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.StormGun
 			Item.crit = 30;
 			Item.useTime = 40;
 			Item.useAnimation = 40;
-			Item.value = 1000;
+			Item.value = Item.sellPrice(gold: 2);
 
 			Item.shoot = ModContent.ProjectileType<StormGunProjectile>();
 			Item.shootSpeed = 20;

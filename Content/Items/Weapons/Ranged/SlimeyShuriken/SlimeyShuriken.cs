@@ -24,17 +24,17 @@ namespace CCMod.Content.Items.Weapons.Ranged.SlimeyShuriken
 
 		public override void SetDefaults()
 		{
-			Item.width = 24;
-			Item.height = 24;
+			Item.width = 14;
+			Item.height = 14;
 
 			Item.useTime = 15;
 			Item.useAnimation = 15;
 
-			Item.damage = 19;
+			Item.damage = 13;
 			Item.knockBack = .5f;
-			Item.value = 15;
+			Item.value = Item.sellPrice(copper: 3);
 
-			Item.rare = ItemRarityID.Green;
+			Item.rare = 0;
 
 			Item.shoot = ModContent.ProjectileType<SlimeyShurikenProjectile>();
 			Item.shootSpeed = 17;
@@ -71,8 +71,8 @@ namespace CCMod.Content.Items.Weapons.Ranged.SlimeyShuriken
 
 		public override void SetDefaults()
 		{
-			Projectile.width = 24;
-			Projectile.height = 24;
+			Projectile.width = 14;
+			Projectile.height = 14;
 			Projectile.penetrate = 3;
 			Projectile.timeLeft = 175;
 			Projectile.friendly = true;

@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace CCMod.Content.Examples.Items.Weapons.Ranged
+namespace CCMod.Content.Examples
 {
 	/// <summary>
 	/// This will teach you how to make a home in projectile
@@ -36,13 +36,6 @@ namespace CCMod.Content.Examples.Items.Weapons.Ranged
 			Projectile.NewProjectile(source, position.OffsetPosition(velocity, 50f), velocity, ModContent.ProjectileType<HomeInProjectile>(), damage, knockback, player.whoAmI, number);
 			return false;
 		}
-		public override void AddRecipes()
-		{
-			CreateRecipe()
-				.AddIngredient(ItemID.Musket, 1)
-				.AddIngredient(ItemID.FallenStar, 10)
-				.Register();
-		}
 	}
 	//This is where we will be making our home in projectile
 	public class HomeInProjectile : ModProjectile
@@ -65,7 +58,7 @@ namespace CCMod.Content.Examples.Items.Weapons.Ranged
 		{
 			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 + MathHelper.Pi;
 			//We use a already existing tool that find the nearest npc that isn't a dummy
-			if (CCModTool.ClosestNPCWithinRange(Projectile.Center, out NPC npc, 600f))
+			if (Projectile.Center.ClosestNPCWithinRange(out NPC npc, 600f))
 			{
 				//This is a standard way to do home in
 				//You don't need to do the check if(Projectile.ai[0] == 0)

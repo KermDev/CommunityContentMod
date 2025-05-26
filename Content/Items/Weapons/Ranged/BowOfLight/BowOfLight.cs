@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
-using CCMod.Content.Items.Material;
+//using CCMod.Content.Items.Material;
 using CCMod.Common.Attributes;
 using CCMod.Utils;
 
@@ -17,8 +17,8 @@ namespace CCMod.Content.Items.Weapons.Ranged.BowOfLight
 	{
 		public override void SetDefaults()
 		{
-			Item.damage = 28;
-			Item.crit = 15;
+			Item.damage = 24;
+			Item.crit = 4;
 			Item.DamageType = DamageClass.Ranged;
 			Item.width = 52;
 			Item.height = 98;
@@ -26,7 +26,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.BowOfLight
 			Item.useStyle = ItemUseStyleID.Shoot;
 			Item.noMelee = true;
 			Item.knockBack = 2;
-			Item.value = 10000;
+			Item.value = Item.sellPrice(silver: 5);
 			Item.rare = ItemRarityID.LightRed;
 			Item.UseSound = SoundID.Item5;
 			Item.autoReuse = true;
@@ -39,7 +39,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.BowOfLight
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ModContent.ItemType<PureSilver>(), 4);
+			recipe.AddIngredient(ItemID.SoulofLight, 5);
 			recipe.AddIngredient(ItemID.Pearlwood, 60);
 			recipe.AddIngredient(ItemID.Topaz, 15);
 			recipe.AddTile(TileID.MythrilAnvil);

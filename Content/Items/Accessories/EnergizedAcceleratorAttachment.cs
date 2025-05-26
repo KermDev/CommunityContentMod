@@ -24,7 +24,7 @@ namespace CCMod.Content.Items.Accessories
 			Item.height = 20;
 			Item.rare = ItemRarityID.LightRed;
 			Item.accessory = true;
-			Item.value = 1000;
+			Item.value = Item.sellPrice(silver: 85);
 		}
 
 		public override void UpdateEquip(Player player)

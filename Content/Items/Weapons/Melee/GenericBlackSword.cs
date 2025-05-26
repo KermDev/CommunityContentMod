@@ -33,9 +33,9 @@ namespace CCMod.Content.Items.Weapons.Melee
 			Item.useTime = 14;
 			Item.useAnimation = 14;
 
-			Item.rare = ItemRarityID.White;
+			Item.rare = ItemRarityID.Green;
 			Item.useStyle = ItemUseStyleID.Swing;
-			Item.value = Item.sellPrice(copper: 1);
+			Item.value = Item.sellPrice(gold: 1);
 			Item.DamageType = DamageClass.Melee;
 			Item.autoReuse = true;
 			Item.scale = 1.5f;

@@ -19,6 +19,9 @@ namespace CCMod.Content.Items.Weapons.Melee
 			Item.shootSpeed = 3;
 			Item.noUseGraphic = true;
 			Item.noMelee = true;
+			Item.rare = 2;
+			Item.value = Item.sellPrice(gold: 1);
+
 		}
 		public override void AddRecipes()
 		{

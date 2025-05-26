@@ -21,7 +21,6 @@ namespace CCMod.Content.Examples.Projectiles
 			Projectile.friendly = true;
 			Projectile.timeLeft = 900;
 		}
-
 		int first = 0;
 		public override void AI()
 		{
@@ -42,7 +41,6 @@ namespace CCMod.Content.Examples.Projectiles
 			Projectile.ai[0]++;
 		}
 	}
-
 	[ExampleItem]
 	class ExampleShootBouncyProjectile : ModItem
 	{
@@ -53,13 +51,6 @@ namespace CCMod.Content.Examples.Projectiles
 			Item.noUseGraphic = true;
 			Item.consumable = true;
 			Item.maxStack = 999;
-		}
-		public override void AddRecipes()
-		{
-			CreateRecipe()
-				.AddIngredient(ItemID.Acorn)
-				.AddTile(TileID.WorkBenches)
-				.Register();
 		}
 	}
 }

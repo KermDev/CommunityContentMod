@@ -4,9 +4,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
+using CCMod.Common.Attributes;
 
 namespace CCMod.Content.Items.Weapons.Ranged.Character
 {
+	[CodedBy("LowQualityTrash-Xinim")]
+	[SpritedBy("LowQualityTrash-Xinim")]
+	[ConceptBy("LowQualityTrash-Xinim")]
 	public class mGun : ModItem
 	{
 		int counter = 0;

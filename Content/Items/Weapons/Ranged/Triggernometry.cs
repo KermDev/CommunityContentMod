@@ -45,7 +45,7 @@ namespace CCMod.Content.Items.Weapons.Ranged
 
 			Item.noMelee = true;
 
-			Item.value = Item.sellPrice(0, 0, 60, 0);
+			Item.value = Item.sellPrice(gold: 1, silver:75);
 			Item.rare = ItemRarityID.Pink;
 
 			Item.shoot = ModContent.ProjectileType<TriggernometryHeldProj>();

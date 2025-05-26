@@ -17,7 +17,7 @@ namespace CCMod.Content.Items.Weapons.Ranged
 {
 	[CodedBy("sucss")]
 	[SpritedBy("mayhemm")]
-	[ChestLoot(ChestType.LockedGoldChest, 8)]
+	[ChestLoot(ChestType.LockedGoldChest, 10)]
 	public class SawbladeEjector : ModItem
 	{
 
@@ -39,7 +39,7 @@ namespace CCMod.Content.Items.Weapons.Ranged
 			Item.useStyle = ItemUseStyleID.Shoot;
 			Item.noMelee = true;
 			Item.autoReuse = true;
-			Item.value = Item.buyPrice(gold: 1);
+			Item.value = Item.buyPrice(gold: 2);
 			Item.rare = ItemRarityID.Blue;
 			Item.shoot = ModContent.ProjectileType<SawbladeEjectorHeldProj>();
 			Item.shootSpeed = 9;

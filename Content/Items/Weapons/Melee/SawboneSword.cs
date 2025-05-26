@@ -24,10 +24,10 @@ namespace CCMod.Content.Items.Weapons.Melee
 		{
 			Item.width = 54;
 			Item.height = 66;
-			Item.DefaultToSword(50, 15, 5, true);
+			Item.DefaultToSword(40, 15, 5, true);
 			Item.rare = ItemRarityID.Orange;
 			Item.shoot = ProjectileID.Ale;
-			Item.value = 5000;
+			Item.value = Item.sellPrice(gold: 2);
 		}
 
 		public override bool AltFunctionUse(Player player)
@@ -66,8 +66,8 @@ namespace CCMod.Content.Items.Weapons.Melee
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ItemID.CrimtaneBar, 12)
-				.AddIngredient(ItemID.Bone, 20)
+				.AddIngredient(ItemID.CrimtaneBar, 20)
+				.AddIngredient(ItemID.Bone, 30)
 				.AddTile(TileID.Anvils)
 				.Register();
 		}

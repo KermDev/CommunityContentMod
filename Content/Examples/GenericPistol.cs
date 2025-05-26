@@ -8,7 +8,7 @@ using CCMod.Common.ProjectileComponentSystem;
 using CCMod.Content.ProjectileComponents;
 using CCMod.Common.Attributes;
 
-namespace CCMod.Content.Examples.Items.Weapons.Ranged
+namespace CCMod.Content.Examples
 {
 	[ExampleItem]
 	[CodedBy("Xinim")]

@@ -6,7 +6,7 @@ using CCMod.Content.Items.Weapons.Melee;
 using Terraria;
 using CCMod.Common.Attributes;
 
-namespace CCMod.Content.Examples.Items.Weapons.Melee
+namespace CCMod.Content.Examples
 {
 	[ExampleItem]
 	[CodedBy("Xinim")]

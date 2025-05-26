@@ -39,8 +39,8 @@ namespace CCMod.Content.Items.Weapons.Ranged.ExperimentalExplosiveLauncher
 			Item.useStyle = ItemUseStyleID.Shoot;
 			Item.noMelee = true;
 			Item.autoReuse = true;
-			Item.value = Item.buyPrice(gold: 1);
-			Item.rare = ItemRarityID.Blue;
+			Item.value = Item.sellPrice(gold: 1, silver: 50);
+			Item.rare = ItemRarityID.Pink;
 			Item.shoot = ModContent.ProjectileType<ExperimentalExplosiveLauncherHeldProj>();
 			Item.shootSpeed = 0;
 			Item.channel = true;
