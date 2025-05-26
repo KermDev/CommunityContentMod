@@ -46,12 +46,21 @@ namespace CCMod.Content.Items.Weapons.Magic.ElderBranch
 				if (Projectile.scale < 1f)
 					Projectile.scale += 0.05f;
 			}
-			public override bool OnTileCollide(Vector2 oldVelocity)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+		{
+			Main.rand.NextBool(3);
+	        {
+				target.AddBuff(BuffID.Poisoned, 120);
+			}
+			base.OnHitNPC(target, hit, damageDone);
+		}
+
+		public override bool OnTileCollide(Vector2 oldVelocity)
 			{
 				SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
 				for (int i = 0; i < 3; i++)
 				{
-					int dustId = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.SilverFlame);
+					int dustId = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Grass);
 					Dust dust = Main.dust[dustId];
 					dust.velocity = oldVelocity * 0.2f;
 					dust.noGravity = true;

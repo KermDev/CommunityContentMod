@@ -110,7 +110,7 @@ Mods: {
 
 			ElderBranch: {
 				DisplayName: Elder Branch
-				Tooltip: ""
+				Tooltip: this code is definitely not taken from my other mod
 			}
 
 			GenericPistol: {

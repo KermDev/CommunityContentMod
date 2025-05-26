@@ -36,14 +36,14 @@ namespace CCMod.Content.Items.Weapons.Magic.ElderBranch
 			Item.UseSound = SoundID.Item20;
 			Item.autoReuse = true;
 			Item.useTurn = false;
-			Item.crit = 0;
-			Item.mana = 1;
+			Item.crit = 4;
+			Item.mana = 2;
 			Item.noMelee = true;
 		}
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.Wood, 30)
+                .AddIngredient(ItemID.Wood, 35)
                 .AddIngredient(ItemID.GrassSeeds, 15)
                 .AddIngredient(ItemID.Acorn, 3)
                 .AddTile(TileID.WorkBenches)
@@ -71,40 +71,40 @@ namespace CCMod.Content.Items.Weapons.Magic.ElderBranch
 }
 namespace CCMod.Content.Items.Weapons.Magic.ElderBranch
 {
-	public class FeatheredStickModPlayer : ModPlayer
+	public class ElderBranchModPlayer : ModPlayer
 	{
-		public int featherTimer;
-		public int featherUseTime;
+		public int ElderBranchiniTimer;
+		public int ElderBranchiniUseTime;
 		public override void Initialize()
 		{
-			featherTimer = 0;
-			featherUseTime = 30;
+			ElderBranchiniTimer = 0;
+			ElderBranchiniUseTime = 30;
 		}
 		public override void PostUpdate()
 		{
 			if (Player.HeldItem.type == ModContent.ItemType<ElderBranch>() && Player.controlUseItem)
 			{
-				featherTimer++;
-				if (featherTimer >= 40)
+				ElderBranchiniTimer++;
+				if (ElderBranchiniTimer >= 40)
 				{
-					featherTimer = 0;
-					if (featherUseTime > 10)
+					ElderBranchiniTimer = 0;
+					if (ElderBranchiniUseTime > 10)
 					{
-						featherUseTime--;
+						ElderBranchiniUseTime--;
 					}
 				}
 			}
 			else
 			{
-				featherTimer = 0;
-				featherUseTime = 30;
+				ElderBranchiniTimer = 0;
+				ElderBranchiniUseTime = 30;
 			}
 		}
 		public override float UseTimeMultiplier(Item item)
 		{
 			if (item.type == ModContent.ItemType<ElderBranch>())
 			{
-				return featherUseTime / 30f;
+				return ElderBranchiniUseTime / 30f;
 			}
 			return 1f;
 		}
@@ -112,7 +112,7 @@ namespace CCMod.Content.Items.Weapons.Magic.ElderBranch
 		{
 			if (item.type == ModContent.ItemType<ElderBranch>())
 			{
-				return featherUseTime / 30f;
+				return ElderBranchiniUseTime / 30f;
 			}
 			return 1f;
 		}
