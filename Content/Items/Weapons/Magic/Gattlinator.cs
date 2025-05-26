@@ -25,10 +25,12 @@ namespace CCMod.Content.Items.Weapons.Magic
 		}
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			for (int i = 0; i < 6; i++)
+			for (int i = 1; i < 4; i++)
 			{
 				Vector2 vec = velocity.NextVector2RotatedByRandom(17f, 20, i);
-				Projectile.NewProjectile(source, position, vec, type, damage, knockback, player.whoAmI);
+				var projectile = Projectile.NewProjectileDirect(source, position, vec, type, damage, knockback, player.whoAmI, ai0: 0);
+				projectile.usesLocalNPCImmunity = true;
+				projectile.localNPCHitCooldown = 1;
 			}
 			return base.Shoot(player, source, position, velocity, type, damage, knockback);
 		}
@@ -48,11 +50,13 @@ namespace CCMod.Content.Items.Weapons.Magic
 		{
 			Terraria.Audio.SoundStyle item36 = SoundID.Item36;
 			Item.UseSound = item36;
-			Item.SetDefaultMagic(9, 9, 40, 6, 60, 60, ItemUseStyleID.Shoot, ProjectileID.ZapinatorLaser, 10, 6, true);
+			Item.SetDefaultMagic(9, 9, 49, 6, 60, 60, ItemUseStyleID.Shoot, ProjectileID.ZapinatorLaser, 10, 6, true);
 			Item.CanRollPrefix(PrefixID.Masterful);
 			Item.CanRollPrefix(PrefixID.Taboo);
 			Item.CanRollPrefix(PrefixID.Mystic);
 			Item.CanRollPrefix(PrefixID.Manic);
+			Item.rare = 4;
+			Item.value = Item.sellPrice(gold: 17,silver: 40,copper: 20);
 		}
 	}
 }
