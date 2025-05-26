@@ -1,0 +1,20 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\tModLoader.targets" />
+  <PropertyGroup>
+    <AssemblyName>CCMod</AssemblyName>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Content\Items\Material\PureSilver.png" />
+    <None Remove="Content\Items\Weapons\Melee\Aikosword.png" />
+    <None Remove="Content\Items\Weapons\Ranged\BowOfLight\BowOfLight.png" />
+    <None Remove="Content\Items\Weapons\Ranged\Character\mGun.png" />
+    <None Remove="Content\Items\Weapons\Ranged\IronDisk\IronDisk.png" />
+    <None Remove="Content\Items\Weapons\Ranged\WaterDisk\BubbleP.png" />
+    <None Remove="Content\Items\Weapons\Ranged\WaterDisk\WaterDisk.png" />
+  </ItemGroup>
+  <PropertyGroup>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+  </PropertyGroup>
+</Project>
