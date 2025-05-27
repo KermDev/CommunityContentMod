@@ -246,6 +246,86 @@ Mods: {
 				DisplayName: m Gun
 				Tooltip: ""
 			}
+
+			CopperShuriken: {
+				DisplayName: Copper Shuriken
+				Tooltip: "C- for trying\nAlt Click to throw 3 shuriken that is slightly inaccurate"
+			}
+
+			CrimsonShuriken: {
+				DisplayName: Crimson Shuriken
+				Tooltip: ""
+			}
+
+			CrimstoneShuriken: {
+				DisplayName: Crimstone Shuriken
+				Tooltip: "Suprisingly slightly better than ebon"
+			}
+
+			EbonstoneShuriken: {
+				DisplayName: Ebonstone Shuriken
+				Tooltip: "At least it is better than wood"
+			}
+
+			GoldShuriken: {
+				DisplayName: Gold Shuriken
+				Tooltip: "D- for attempting\nAlt Click to throw 6 shuriken that is slightly inaccurate"
+			}
+
+			HellShuriken: {
+				DisplayName: Hell Shuriken
+				Tooltip: "Shine not really bright, but burn you fast"
+			}
+
+			IronShuriken: {
+				DisplayName: Iron Shuriken
+				Tooltip: "Isn't it just worse shuriken ?\nAlt Click to throw 4 shuriken that is slightly inaccurate"
+			}
+
+			JungleShuriken: {
+				DisplayName: Jungle Shuriken
+				Tooltip: "Feel the Jungle Wrath"
+			}
+
+			LeadShuriken: {
+				DisplayName: Lead Shuriken
+				Tooltip: "Just a better shuriken at this point ?\nAlt Click to throw 4 shuriken that is slightly inaccurate"
+			}
+
+			PlatinumShuriken: {
+				DisplayName: Platinum Shuriken
+				Tooltip: "A+ Quality, never fail me\nAlt Click to throw 6 shuriken that is slightly inaccurate"
+			}
+
+			Sandquake: {
+				DisplayName: Sandquake
+				Tooltip: "don't even ask me how"
+			}
+
+			SilverShuriken: {
+				DisplayName: Silver Shuriken
+				Tooltip: "Can this kill vampire ? surely it must right ?\nAlt Click to throw 5 shuriken that is slightly inaccurate"
+			}
+
+			Snowflake: {
+				DisplayName: Snowflake
+				Tooltip: "damn, such a snowflake"
+			}
+
+			TinShuriken: {
+				DisplayName: Tin Shuriken
+				Tooltip: "B- for trying\nAlt Click to throw 3 shuriken that is slightly inaccurate"
+			}
+
+			TungstenShuriken: {
+				DisplayName: Tungsten Shuriken
+				Tooltip: "i'm not sure i like this\nAlt Click to throw 5 shuriken that is slightly inaccurate"
+			}
+
+			WoodShuriken: {
+				DisplayName: Wood Shuriken
+				Tooltip: "A+ for effort"
+			}
 		}
 
 		Projectiles: {
@@ -302,6 +382,24 @@ Mods: {
 			Tcharacter.DisplayName: Tcharacter
 			Ucharacter.DisplayName: Ucharacter
 			ElderBranchProj.DisplayName: Elder Branch Proj
+			CopperShurikenP.DisplayName: Copper Shuriken P
+			CrimsonShurikenP.DisplayName: Crimson Shuriken P
+			CrimstoneShurikenP.DisplayName: Crimstone Shuriken P
+			EbonstoneShurikenP.DisplayName: Ebonstone Shuriken P
+			GoldShurikenP.DisplayName: Gold Shuriken P
+			HellShurikenP.DisplayName: Hell Shuriken P
+			IronShurikenP.DisplayName: Iron Shuriken P
+			JungleShurikenP.DisplayName: Jungle Shuriken P
+			LeadShurikenP.DisplayName: Lead Shuriken P
+			PlatinumShurikenP.DisplayName: Platinum Shuriken P
+			SandquakeP.DisplayName: Sandquake P
+			SandstoneSpike.DisplayName: Sandstone Spike
+			SilverShurikenP.DisplayName: Silver Shuriken P
+			SnowflakeP.DisplayName: Snowflake P
+			SporeSac.DisplayName: Spore Sac
+			TinShurikenP.DisplayName: Tin Shuriken P
+			TungstenShurikenP.DisplayName: Tungsten Shuriken P
+			WoodShurikenP.DisplayName: Wood Shuriken P
 		}
 
 		Buffs: {
@@ -313,6 +411,11 @@ Mods: {
 			Exhausted2: {
 				DisplayName: Exhausted2
 				Description: You have over exerted yourself and are now paying the price
+			}
+
+			JungleWrath: {
+				DisplayName: Jungle Wrath
+				Description: Mods.CCMod.Buffs.JungleWrath.Description
 			}
 		}
 	}
