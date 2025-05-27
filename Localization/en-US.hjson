@@ -249,7 +249,11 @@ Mods: {
 
 			CopperShuriken: {
 				DisplayName: Copper Shuriken
-				Tooltip: "C- for trying\nAlt Click to throw 3 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					C- for trying
+					Alt Click to throw 3 shuriken that is slightly inaccurate
+					'''
 			}
 
 			CrimsonShuriken: {
@@ -259,72 +263,100 @@ Mods: {
 
 			CrimstoneShuriken: {
 				DisplayName: Crimstone Shuriken
-				Tooltip: "Suprisingly slightly better than ebon"
+				Tooltip: Suprisingly slightly better than ebon
 			}
 
 			EbonstoneShuriken: {
 				DisplayName: Ebonstone Shuriken
-				Tooltip: "At least it is better than wood"
+				Tooltip: At least it is better than wood
 			}
 
 			GoldShuriken: {
 				DisplayName: Gold Shuriken
-				Tooltip: "D- for attempting\nAlt Click to throw 6 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					D- for attempting
+					Alt Click to throw 6 shuriken that is slightly inaccurate
+					'''
 			}
 
 			HellShuriken: {
 				DisplayName: Hell Shuriken
-				Tooltip: "Shine not really bright, but burn you fast"
+				Tooltip: Shine not really bright, but burn you fast
 			}
 
 			IronShuriken: {
 				DisplayName: Iron Shuriken
-				Tooltip: "Isn't it just worse shuriken ?\nAlt Click to throw 4 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					Isn't it just worse shuriken ?
+					Alt Click to throw 4 shuriken that is slightly inaccurate
+					'''
 			}
 
 			JungleShuriken: {
 				DisplayName: Jungle Shuriken
-				Tooltip: "Feel the Jungle Wrath"
+				Tooltip: Feel the Jungle Wrath
 			}
 
 			LeadShuriken: {
 				DisplayName: Lead Shuriken
-				Tooltip: "Just a better shuriken at this point ?\nAlt Click to throw 4 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					Just a better shuriken at this point ?
+					Alt Click to throw 4 shuriken that is slightly inaccurate
+					'''
 			}
 
 			PlatinumShuriken: {
 				DisplayName: Platinum Shuriken
-				Tooltip: "A+ Quality, never fail me\nAlt Click to throw 6 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					A+ Quality, never fail me
+					Alt Click to throw 6 shuriken that is slightly inaccurate
+					'''
 			}
 
 			Sandquake: {
 				DisplayName: Sandquake
-				Tooltip: "don't even ask me how"
+				Tooltip: don't even ask me how
 			}
 
 			SilverShuriken: {
 				DisplayName: Silver Shuriken
-				Tooltip: "Can this kill vampire ? surely it must right ?\nAlt Click to throw 5 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					Can this kill vampire ? surely it must right ?
+					Alt Click to throw 5 shuriken that is slightly inaccurate
+					'''
 			}
 
 			Snowflake: {
 				DisplayName: Snowflake
-				Tooltip: "damn, such a snowflake"
+				Tooltip: damn, such a snowflake
 			}
 
 			TinShuriken: {
 				DisplayName: Tin Shuriken
-				Tooltip: "B- for trying\nAlt Click to throw 3 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					B- for trying
+					Alt Click to throw 3 shuriken that is slightly inaccurate
+					'''
 			}
 
 			TungstenShuriken: {
 				DisplayName: Tungsten Shuriken
-				Tooltip: "i'm not sure i like this\nAlt Click to throw 5 shuriken that is slightly inaccurate"
+				Tooltip:
+					'''
+					i'm not sure i like this
+					Alt Click to throw 5 shuriken that is slightly inaccurate
+					'''
 			}
 
 			WoodShuriken: {
 				DisplayName: Wood Shuriken
-				Tooltip: "A+ for effort"
+				Tooltip: A+ for effort
 			}
 		}
 
