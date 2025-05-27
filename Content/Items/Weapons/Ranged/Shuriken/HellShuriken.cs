@@ -1,3 +1,4 @@
+using CCMod.Common.Attributes;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -5,6 +6,9 @@ using static Terraria.ModLoader.ModContent;
 
 namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 {
+	[CodedBy("LowQualityTrash-Xinim")]
+	[SpritedBy("LowQualityTrash-Xinim")]
+	[ConceptBy("LowQualityTrash-Xinim")]
 	public class HellShuriken : ModItem
 	{
 		public override void SetStaticDefaults()

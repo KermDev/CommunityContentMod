@@ -1,11 +1,15 @@
+using CCMod.Common.Attributes;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
 
 namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 {
+	[CodedBy("LowQualityTrash-Xinim")]
+	[SpritedBy("LowQualityTrash-Xinim")]
+	[ConceptBy("LowQualityTrash-Xinim")]
 	public class CrimsonShuriken : ModItem
 	{
 		public override void SetStaticDefaults()

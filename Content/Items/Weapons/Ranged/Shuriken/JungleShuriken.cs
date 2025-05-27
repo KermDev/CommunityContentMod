@@ -1,11 +1,15 @@
+using CCMod.Common.Attributes;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
 using static Terraria.ModLoader.ModContent;
 
 namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 {
+	[CodedBy("LowQualityTrash-Xinim")]
+	[SpritedBy("LowQualityTrash-Xinim")]
+	[ConceptBy("LowQualityTrash-Xinim")]
 	public class JungleShuriken : ModItem
 	{
         public override void SetStaticDefaults()

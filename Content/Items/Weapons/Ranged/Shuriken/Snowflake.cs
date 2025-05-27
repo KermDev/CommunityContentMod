@@ -1,9 +1,13 @@
+using CCMod.Common.Attributes;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 {
+	[CodedBy("LowQualityTrash-Xinim")]
+	[SpritedBy("LowQualityTrash-Xinim")]
+	[ConceptBy("LowQualityTrash-Xinim")]
 	public class Snowflake : ModItem
 	{
         public override void SetStaticDefaults()
