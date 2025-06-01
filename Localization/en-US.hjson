@@ -358,6 +358,11 @@ Mods: {
 				DisplayName: Wood Shuriken
 				Tooltip: A+ for effort
 			}
+
+			SuperShortSword: {
+				DisplayName: Super Short Sword
+				Tooltip: ""
+			}
 		}
 
 		Projectiles: {
@@ -432,6 +437,8 @@ Mods: {
 			TinShurikenP.DisplayName: Tin Shuriken P
 			TungstenShurikenP.DisplayName: Tungsten Shuriken P
 			WoodShurikenP.DisplayName: Wood Shuriken P
+			SuperShortSwordOrbitShortSword.DisplayName: Super Short Sword Orbit Short Sword
+			SuperShortSwordP.DisplayName: Super Short Sword P
 		}
 
 		Buffs: {
@@ -448,6 +455,11 @@ Mods: {
 			JungleWrath: {
 				DisplayName: Jungle Wrath
 				Description: Mods.CCMod.Buffs.JungleWrath.Description
+			}
+
+			SuperShortSwordPower: {
+				DisplayName: Super Short Sword Power
+				Description: Mods.CCMod.Buffs.SuperShortSwordPower.Description
 			}
 		}
 	}
