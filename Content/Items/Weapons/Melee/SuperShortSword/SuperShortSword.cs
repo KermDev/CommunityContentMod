@@ -1,12 +1,14 @@
-﻿using CCMod.Utils;
+﻿using CCMod.Common.Attributes;
+using CCMod.Utils;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CCMod.Content.Items.Weapons.Melee.SuperShortSword
 {
+	[CodedBy("LowQualityTrash-Xinim")]
+	[SpritedBy("LowQualityTrash-Xinim")]
 	class SuperShortSword : ModItem
 	{
 		public override void SetDefaults()

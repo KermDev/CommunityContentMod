@@ -1,13 +1,17 @@
-﻿using CCMod.Utils;
+﻿using CCMod.Common.Attributes;
+using CCMod.Utils;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace CCMod.Content.Items.Weapons.Melee
 {
+	[CodedBy("LowQualityTrash-Xinim")]
+	[ConceptBy("LowQualityTrash-Xinim")]
+	[SpritedBy("makielu")]
 	public class Aikosword : ModItem
 	{
 		public override void SetDefaults()
