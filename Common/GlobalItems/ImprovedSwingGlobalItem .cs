@@ -10,13 +10,15 @@ namespace CCMod.Common.GlobalItems
 	public class ImprovedSwingGlobalItem : GlobalItem
 	{
 		public const float PLAYERARMLENGTH = 12f;
-		/// <summary>
-		/// Do not mistake this with giving i frame to melee weapon<br/>
-		/// this instead will make it so that the NPC i frame reach faster by setting the end point equal to this<br/>
-		/// W.I.P
-		/// </summary>
-		public int? CustomIFrame = null;
 		public override bool InstancePerEntity => true;
+		public override bool AppliesToEntity(Item entity, bool lateInstantiation)
+		{
+			if (entity.ModItem == null)
+			{
+				return false;
+			}
+			return entity.ModItem.Mod.Name == Mod.Name;
+		}
 		public override void UseStyle(Item item, Player player, Rectangle heldItemFrame)
 		{
 			if (item.ModItem is IMeleeWeaponWithImprovedSwing itemswing && !item.noMelee)
@@ -61,10 +63,6 @@ namespace CCMod.Common.GlobalItems
 			if (item.ModItem is IMeleeWeaponWithImprovedSwing extradata)
 			{
 				float itemsize = item.Size.Length() * player.GetAdjustedItemScale(player.HeldItem);
-				if (CustomIFrame == null)
-				{
-					return false;
-				}
 				if (target.immune[player.whoAmI] > 0)
 				{
 					return false;
@@ -114,19 +112,6 @@ public class ImprovedSwingGlobalItemPlayer : ModPlayer
 		if (Player.ItemAnimationJustStarted)
 		{
 			data = (Main.MouseWorld - Player.MountedCenter).SafeNormalize(Vector2.Zero);
-			Item item = Player.HeldItem;
-			ImprovedSwingGlobalItem globalitem = item.GetGlobalItem<ImprovedSwingGlobalItem>();
-			if (globalitem.CustomIFrame != null && globalitem.CustomIFrame > -1)
-			{
-				for (int i = 0; i < Player.meleeNPCHitCooldown.Length; i++)
-				{
-					if (Player.meleeNPCHitCooldown[i] > 0)
-					{
-						Player.meleeNPCHitCooldown[i] = (int)globalitem.CustomIFrame;
-					}
-
-				}
-			}
 		}
 		if (Player.ItemAnimationActive)
 		{
@@ -135,18 +120,6 @@ public class ImprovedSwingGlobalItemPlayer : ModPlayer
 		else
 		{
 			MouseLastPositionBeforeAnimation = Main.MouseWorld;
-		}
-	}
-	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-	{
-		Item item = Player.HeldItem;
-		ImprovedSwingGlobalItem globalitem = item.GetGlobalItem<ImprovedSwingGlobalItem>();
-		if (globalitem.CustomIFrame != null && globalitem.CustomIFrame > -1)
-		{
-			if (Player.meleeNPCHitCooldown[target.whoAmI] > 0)
-			{
-				Player.meleeNPCHitCooldown[target.whoAmI] = (int)globalitem.CustomIFrame;
-			}
 		}
 	}
 }

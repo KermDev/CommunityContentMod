@@ -1,5 +1,7 @@
 # 🌳 CCMod
 
+[MASSIVE FUCKING WARNING] : WHEN YOU FORK THIS RESPO, NAME YOUR FOLDER "CCMod" OR ELSE IT WILL CAUSE ERROR
+
 > [Discord Server](https://discord.gg/29Ztyny7EU)
 
 The CCMod is a content mod created and ellaborated by the [tModLoader Community](https://discord.gg/tmodloader), made by all for all.
