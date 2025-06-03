@@ -439,6 +439,8 @@ Mods: {
 			WoodShurikenP.DisplayName: Wood Shuriken P
 			SuperShortSwordOrbitShortSword.DisplayName: Super Short Sword Orbit Short Sword
 			SuperShortSwordP.DisplayName: Super Short Sword P
+			SimplePiercingProjectile.DisplayName: Simple Piercing Projectile
+			Xinim_SimpleProjectile.DisplayName: Xinim_ Simple Projectile
 		}
 
 		Buffs: {

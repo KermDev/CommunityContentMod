@@ -137,7 +137,7 @@ namespace CCMod.Content.Items.Weapons.Melee
 		public override void AI()
 		{
 			Player player = Main.player[Projectile.owner];
-			if (player.GetModPlayer<GenericBlackSwordPlayer>().YouGotHitLMAO)
+			if (player.GetModPlayer<GenericBlackSwordPlayer>().YouGotHitLMAO && Projectile.ai[1] == 0)
 			{
 				Projectile.ai[1] = 1;
 			}
