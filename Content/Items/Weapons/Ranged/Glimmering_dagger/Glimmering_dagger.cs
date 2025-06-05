@@ -23,8 +23,8 @@ namespace CCMod.Content.Items.Weapons.Ranged.Glimmering_dagger
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.ThrowingKnife, 100);
-			recipe.AddIngredient(ItemID.ShimmerTorch, 1);
+			recipe.AddIngredient(ItemID.ThrowingKnife, 133);
+			recipe.AddIngredient(ItemID.ShimmerTorch, 10);
 			recipe.AddTile(TileID.ShimmerMonolith);
 			recipe.Register();
 		}
@@ -33,7 +33,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.Glimmering_dagger
 			Item.scale = 1.20f;
 			Item.width = 12;
 			Item.height = 22;
-			Item.damage = 12;
+			Item.damage = 3;
 			Item.knockBack = 3;
 			Item.useTime = Item.useAnimation = 30;
 			Item.DamageType = DamageClass.Ranged;
@@ -41,7 +41,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.Glimmering_dagger
 			Item.noMelee = true;
 			Item.autoReuse = true;
 			Item.noUseGraphic = true;
-			Item.value = Item.sellPrice(silver: 3);
+			Item.value = Item.sellPrice(silver: 5);
 			Item.rare = ItemRarityID.Green;
 			Item.shoot = ModContent.ProjectileType<Glimmering_dagger_projectile>();
 			Item.shootSpeed = 13.8f;
