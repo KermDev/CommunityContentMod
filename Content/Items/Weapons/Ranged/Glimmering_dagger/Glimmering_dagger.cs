@@ -33,7 +33,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.Glimmering_dagger
 			Item.scale = 1.20f;
 			Item.width = 12;
 			Item.height = 22;
-			Item.damage = 3;
+			Item.damage = 6;
 			Item.knockBack = 3;
 			Item.useTime = Item.useAnimation = 30;
 			Item.DamageType = DamageClass.Ranged;
