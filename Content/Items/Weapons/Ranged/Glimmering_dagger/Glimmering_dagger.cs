@@ -41,7 +41,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.Glimmering_dagger
 			Item.noMelee = true;
 			Item.autoReuse = true;
 			Item.noUseGraphic = true;
-			Item.value = Item.sellPrice(silver: 5);
+			Item.value = Item.sellPrice(silver: 5, copper: 8);
 			Item.rare = ItemRarityID.Green;
 			Item.shoot = ModContent.ProjectileType<Glimmering_dagger_projectile>();
 			Item.shootSpeed = 13.8f;
