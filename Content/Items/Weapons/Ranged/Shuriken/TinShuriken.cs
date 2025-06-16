@@ -1,83 +1,65 @@
 using CCMod.Common.Attributes;
+using CCMod.Content.Projectiles;
+using CCMod.Utils;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 {
 	[CodedBy("LowQualityTrash-Xinim")]
 	[SpritedBy("LowQualityTrash-Xinim")]
 	[ConceptBy("LowQualityTrash-Xinim")]
-	public class TinShuriken : ModItem
+	public class TinShuriken : BaseShurikenWeapon
 	{
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Tin Shuriken");
-            // Tooltip.SetDefault("B- for trying\nAlt Click to throw 3 shuriken that is slightly inaccurate");
-		}
-
-		public override void SetDefaults() {
-			Item.damage = 8;
-            Item.DamageType = DamageClass.Ranged;
-            Item.useStyle = 1;
-            Item.noMelee = true;
-            Item.noUseGraphic = true;
-            Item.autoReuse = false;
-			Item.width = 19;
-			Item.height = 19;
-            Item.useTime = 19;
-            Item.useAnimation = 19;
-            Item.knockBack = 0.9f;
+		public override void SetDefaultShuriken()
+		{
+			SetDefaultWeapon(19, 19, 12, .9f, 19, 19, ModContent.ProjectileType<TinShurikenP>(), 16f);
 			Item.value = 50;
 			Item.rare = ItemRarityID.Blue;
-			Item.shoot = Mod.Find<ModProjectile>("TinShurikenP").Type;
-			Item.shootSpeed = 16f;
-            Item.consumable = true;
-            Item.maxStack = 999;
-            Item.reuseDelay = 0;
-        }
+		}
 
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-
-        public override bool CanUseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                Item.useTime = 5;
-                Item.useAnimation = 15;
-                Item.reuseDelay = 30;
-                Item.shootSpeed = 10f;
-                Item.shoot = Mod.Find<ModProjectile>("TinShurikenP").Type;
-            }
-            else
-            {
-                Item.useAnimation = 19;
-                Item.useTime = 19;
-                Item.shootSpeed = 17f;
-                Item.reuseDelay = 0;
-                Item.shoot = Mod.Find<ModProjectile>("TinShurikenP").Type;
-            }
-            return base.CanUseItem(player);
-        }
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                velocity = velocity.RotatedByRandom(MathHelper.ToRadians(15));
-            }
-        }
-
-        public override void AddRecipes() {
-            Recipe recipe = CreateRecipe(50);
-            recipe.AddIngredient(ItemID.TinBar, 1);
-            recipe.AddTile(TileID.Anvils);
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe(50);
+			recipe.AddIngredient(ItemID.TinBar, 1);
+			recipe.AddIngredient(ItemID.FallenStar, 1);
+			recipe.AddTile(TileID.Anvils);
 			recipe.Register();
+		}
+	}
+	public class TinShurikenP : ModProjectile
+	{
+		public override string Texture => CCModTool.GetSameTextureAs<TinShuriken>();
+		public override void SetDefaults()
+		{
+			Projectile.width = 19;
+			Projectile.height = 19;
+			Projectile.aiStyle = 2;
+			Projectile.friendly = true;
+			Projectile.tileCollide = true;
+			Projectile.penetrate = 1;
+			Projectile.DamageType = DamageClass.Ranged;
+		}
+		public override void AI()
+		{
+			Projectile.spriteDirection = Projectile.direction;
+			if (Projectile.velocity.Y > 16f)
+			{
+				Projectile.velocity.Y = 16f;
+			}
+		}
+		public override void OnKill(int timeLeft)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				Projectile projectile = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.UnitX.RotatedBy(MathHelper.PiOver2 * i), ModContent.ProjectileType<Xinim_SimpleProjectile>(), (int)(Projectile.damage * .4f), 1f, Projectile.owner, 5);
+				if (projectile.ModProjectile is Xinim_SimpleProjectile modproj)
+				{
+					modproj.ProjectileColor = new Color(255, 255, 200);
+				}
+			}
 		}
 	}
 }

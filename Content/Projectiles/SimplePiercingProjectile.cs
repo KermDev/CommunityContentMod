@@ -25,7 +25,7 @@ namespace CCMod.Content.Projectiles
 			Projectile.penetrate = -1;
 			Projectile.timeLeft = 60;
 			Projectile.usesIDStaticNPCImmunity = true;
-			Projectile.idStaticNPCHitCooldown = 40;
+			Projectile.idStaticNPCHitCooldown = 20;
 			Projectile.tileCollide = false;
 			Projectile.friendly = true;
 		}

@@ -1,11 +1,12 @@
-using CCMod.Common.Attributes;
-using CCMod.Content.Projectiles;
-using CCMod.Utils;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
+using CCMod.Utils;
 using Terraria.ModLoader;
+using Terraria.GameContent;
+using CCMod.Common.Attributes;
+using Microsoft.Xna.Framework;
+using CCMod.Content.Projectiles;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 {
@@ -33,12 +34,12 @@ namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 		public override string Texture => CCModTool.GetSameTextureAs<CrimsonShuriken>();
 		public override void SetDefaults()
 		{
-			Projectile.width = 66 * 2;
-			Projectile.height = 66 * 2;
+			Projectile.width = 33;
+			Projectile.height = 33;
 			Projectile.scale = .5f;
 			Projectile.aiStyle = 2;
 			Projectile.friendly = true;
-			Projectile.tileCollide = false;
+			Projectile.tileCollide = true;
 			Projectile.penetrate = 5;
 			Projectile.DamageType = DamageClass.Ranged;
 		}
@@ -48,16 +49,6 @@ namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 			if (Projectile.velocity.Y > 16f)
 			{
 				Projectile.velocity.Y = 16f;
-			}
-			Point16 tile = Projectile.Center.ToTileCoordinates16();
-			Tile tiletoCheck;
-			if (WorldGen.InWorld(tile.X, tile.Y))
-			{
-				tiletoCheck = Main.tile[tile.X, tile.Y];
-				if (!WorldGen.TileEmpty(tile.X, tile.Y) && tiletoCheck.TileType != TileID.Platforms && WorldGen.SolidTile(tiletoCheck))
-				{
-					Projectile.Kill();
-				}
 			}
 		}
 		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -73,6 +64,14 @@ namespace CCMod.Content.Items.Weapons.Ranged.Shuriken
 			{
 				modproj.ProjectileColor = new Color(255, 100, 100);
 			}
+		}
+		public override bool PreDraw(ref Color lightColor)
+		{
+			Main.instance.LoadProjectile(Type);
+			Texture2D texture = TextureAssets.Projectile[Type].Value;
+			Vector2 origin = texture.Size() * .5f;
+			Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, origin, Projectile.scale, SpriteEffects.None);
+			return false;
 		}
 	}
 }
