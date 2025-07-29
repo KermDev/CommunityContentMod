@@ -34,7 +34,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.ExperimentalPlasmacaster
 		{
 			Item.width = 38;
 			Item.height = 30;
-			Item.damage = 86;
+			Item.damage = 95;
 			Item.useTime = 10;
 			Item.useAnimation = 10;
 			Item.DamageType = DamageClass.Ranged;
@@ -248,7 +248,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.ExperimentalPlasmacaster
 
 			if (Main.myPlayer == Projectile.owner)
 			{
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), shootOrigin, aimNormal * 8, ModContent.ProjectileType<FlyingNightmare>(), 102, 2, Projectile.owner);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), shootOrigin, aimNormal * 8, ModContent.ProjectileType<FlyingNightmare>(), 130, 2, Projectile.owner);
 			}
 		}
 

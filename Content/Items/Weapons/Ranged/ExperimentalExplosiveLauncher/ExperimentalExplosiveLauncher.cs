@@ -33,7 +33,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.ExperimentalExplosiveLauncher
 		{
 			Item.width = 38;
 			Item.height = 30;
-			Item.damage = 54;
+			Item.damage = 60;
 			Item.useTime = Item.useAnimation = 25;
 			Item.DamageType = DamageClass.Ranged;
 			Item.useStyle = ItemUseStyleID.Shoot;

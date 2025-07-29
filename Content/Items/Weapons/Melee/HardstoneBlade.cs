@@ -29,8 +29,8 @@ namespace CCMod.Content.Items.Weapons.Melee
 			Item.width = 54;
 			Item.height = 54;
 
-			Item.crit = 7;
-			Item.damage = 12;
+			Item.crit = 0;
+			Item.damage = 14;
 			Item.knockBack = 4f;
 			Item.DamageType = DamageClass.Melee;
 
