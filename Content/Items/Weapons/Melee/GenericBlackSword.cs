@@ -1,26 +1,26 @@
 ﻿using CCMod.Common.Attributes;
+using CCMod.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace CCMod.Content.Items.Weapons.Melee
 {
 	[CodedBy("LowQualityTrash-Xinim")]
 	[SpritedBy("LowQualityTrash-Xinim")]
-	internal class GenericBlackSword : ModItem
+	internal class GenericBlackSword : ModItem, IMeleeWeaponWithImprovedSwing
 	{
+		public float SwingDegree => 155;
+
 		public override void SetStaticDefaults()
 		{
-			// Tooltip.SetDefault("it is just a generic sword");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 		public override void SetDefaults()
@@ -30,8 +30,8 @@ namespace CCMod.Content.Items.Weapons.Melee
 
 			Item.damage = 27;
 			Item.knockBack = 2f;
-			Item.useTime = 14;
-			Item.useAnimation = 14;
+			Item.useTime = 24;
+			Item.useAnimation = 24;
 
 			Item.rare = ItemRarityID.Green;
 			Item.useStyle = ItemUseStyleID.Swing;
@@ -47,11 +47,11 @@ namespace CCMod.Content.Items.Weapons.Melee
 		public override void ModifyTooltips(List<TooltipLine> tooltips)
 		{
 			Player player = Main.LocalPlayer;
-			if (player.name == "LowQualityTrashXinim" || player.GetModPlayer<GenericBlackSwordPlayer>().HowDIDyouFigureThatOut > 0)
+			if (player.name == "LowQualityTrashXinim")
 			{
 				foreach (TooltipLine item in tooltips)
 				{
-					if (item.Text == "Generic Black Sword")
+					if (item.Name == "ItemName")
 					{
 						item.OverrideColor = Main.DiscoColor;
 					}
@@ -60,21 +60,13 @@ namespace CCMod.Content.Items.Weapons.Melee
 		}
 		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 		{
-			if (!player.GetModPlayer<GenericBlackSwordPlayer>().VoidSlash)
-			{
-				type = ProjectileID.None;
-			}
-
-			velocity = player.direction == 1 ? new Vector2(5, 0) : new Vector2(-5, 0);
-			position.Y -= 30;
+			velocity = (Main.MouseWorld - position).SafeNormalize(Vector2.Zero) * 5;
+			position = position.OffsetPosition(velocity, 50);
 		}
 
 		public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			if (player.GetModPlayer<GenericBlackSwordPlayer>().VoidBladeProtection)
-			{
-				player.GetModPlayer<GenericBlackSwordPlayer>().VoidCount++;
-			}
+			player.GetModPlayer<GenericBlackSwordPlayer>().VoidCount++;
 		}
 
 		public override void MeleeEffects(Player player, Rectangle hitbox)
@@ -84,11 +76,33 @@ namespace CCMod.Content.Items.Weapons.Melee
 			int dust = Dust.NewDust(hitboxCenter, hitbox.Width, hitbox.Height, DustID.t_Granite, 0, 0, 0, Color.Black, Main.rand.NextFloat(1.25f, 1.75f));
 			Main.dust[dust].noGravity = true;
 		}
+		public override void AddRecipes()
+		{
+			CreateRecipe()
+				.AddIngredient(ItemID.WoodenSword)
+				.AddIngredient(ItemID.LightsBane)
+				.AddIngredient(ItemID.Deathweed, 10)
+				.AddTile(TileID.DemonAltar)
+				.Register();
+
+			CreateRecipe()
+				.AddIngredient(ItemID.WoodenSword)
+				.AddIngredient(ItemID.Deathweed, 10)
+				.AddIngredient(ItemID.Diamond, 30)
+				.AddIngredient(ItemID.BlackInk)
+				.AddTile(TileID.DemonAltar)
+				.Register();
+		}
 	}
 
 	internal class GenericBlackSwordProjectileBlade : ModProjectile
 	{
-		public override string Texture => "CCMod/Content/Items/Weapons/Melee/GenericBlackSword";
+		public override string Texture => CCModTool.GetSameTextureAs<GenericBlackSword>();
+		public override void SetStaticDefaults()
+		{
+			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 50;
+			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+		}
 		public override void SetDefaults()
 		{
 			Projectile.width = 40;
@@ -98,8 +112,6 @@ namespace CCMod.Content.Items.Weapons.Melee
 			Projectile.friendly = true;
 			Projectile.tileCollide = false;
 			Projectile.extraUpdates = 6;
-			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 50;
-			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
 		}
 		public void Behavior(Player player, float offSet, int Counter, float Distance = 150)
 		{
@@ -125,17 +137,16 @@ namespace CCMod.Content.Items.Weapons.Melee
 		public override void AI()
 		{
 			Player player = Main.player[Projectile.owner];
-			if (player.GetModPlayer<GenericBlackSwordPlayer>().YouGotHitLMAO)
+			if (player.GetModPlayer<GenericBlackSwordPlayer>().YouGotHitLMAO && Projectile.ai[1] == 0)
 			{
-				Projectile.ai[0]++;
-				if (Projectile.ai[0] == 150)
+				Projectile.ai[1] = 1;
+			}
+			if (Projectile.ai[1] == 1)
+			{
+				float distance = 1500;
+				NPC closestNPC = FindClosestNPC(distance);
+				if (++Projectile.ai[0] >= 150)
 				{
-					Projectile.penetrate = 1;
-					Projectile.netUpdate = true;
-
-					float distance = 1500;
-
-					NPC closestNPC = FindClosestNPC(distance);
 					if (closestNPC != null && Check == 0)
 					{
 						Projectile.damage *= 5;
@@ -148,7 +159,14 @@ namespace CCMod.Content.Items.Weapons.Melee
 				}
 				else
 				{
-					Projectile.rotation = MathHelper.PiOver4 + (Main.MouseWorld - Projectile.Center).SafeNormalize(Vector2.UnitX).ToRotation();
+					if (closestNPC != null)
+					{
+						Projectile.rotation = MathHelper.PiOver4 + (closestNPC.Center - Projectile.Center).ToRotation();
+					}
+					else
+					{
+						Projectile.rotation = MathHelper.PiOver4 + (Main.MouseWorld - Projectile.Center).ToRotation();
+					}
 				}
 			}
 			else
@@ -234,10 +252,13 @@ namespace CCMod.Content.Items.Weapons.Melee
 
 		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			target.immune[Projectile.owner] = 5;
-			if (Main.player[Projectile.owner].GetModPlayer<GenericBlackSwordPlayer>().YouGotHitLMAO)
+			if (Projectile.ai[1] == 1)
 			{
-				target.immune[Projectile.owner] = 0;
+				target.immune[Projectile.owner] = 3;
+			}
+			else
+			{
+				target.immune[Projectile.owner] = 8;
 			}
 		}
 
@@ -253,9 +274,9 @@ namespace CCMod.Content.Items.Weapons.Melee
 		public override bool PreDraw(ref Color lightColor)
 		{
 			Main.instance.LoadProjectile(Projectile.type);
-			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+			Texture2D texture = TextureAssets.Projectile[Type].Value;
 
-			Vector2 origin = new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f);
+			Vector2 origin = texture.Size() * .5f;
 			for (int k = 1; k < Projectile.oldPos.Length + 1; k++)
 			{
 				Vector2 drawPos = Projectile.oldPos[k - 1] - Main.screenPosition + origin + new Vector2(Projectile.gfxOffY);
@@ -269,7 +290,7 @@ namespace CCMod.Content.Items.Weapons.Melee
 
 	internal class GenericBlackSwordProjectile : ModProjectile
 	{
-		public override string Texture => "CCMod/Content/Items/Weapons/Melee/GenericBlackSword";
+		public override string Texture => CCModTool.GetSameTextureAs<GenericBlackSword>();
 		public override void SetDefaults()
 		{
 			Projectile.hide = true;
@@ -356,6 +377,11 @@ namespace CCMod.Content.Items.Weapons.Melee
 
 	public class GenericBlackSwordSlash : ModProjectile
 	{
+		public override void SetStaticDefaults()
+		{
+			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 40;
+			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+		}
 		public override void SetDefaults()
 		{
 			Projectile.width = 68;
@@ -364,27 +390,23 @@ namespace CCMod.Content.Items.Weapons.Melee
 			Projectile.penetrate = -1;
 			Projectile.DamageType = DamageClass.Melee;
 			Projectile.tileCollide = false;
-			Projectile.timeLeft = 50;
+			Projectile.timeLeft = 250;
 			Projectile.light = 0.5f;
 			Projectile.extraUpdates = 6;
-			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 40;
-			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+			Projectile.alpha = 255;
 		}
-		Player player => Main.player[Projectile.owner];
 		public override void AI()
 		{
+			if (Projectile.timeLeft <= 75)
+			{
+				Projectile.velocity *= .96f;
+				Projectile.alpha = Math.Clamp(Projectile.alpha - 3, 0, 255);
+			}
 			Projectile.rotation = Projectile.velocity.ToRotation();
 
 			Vector2 BetterTop = new Vector2(Projectile.Center.X, Projectile.Center.Y - Projectile.height * 0.5f);
 			Dust.NewDust(BetterTop, Projectile.width, Projectile.height, DustID.t_Granite, Projectile.velocity.X, 0, 0, Color.Black, Main.rand.NextFloat(0.55f, 1f));
-			if (player.GetModPlayer<GenericBlackSwordPlayer>().VoidSlashUpgrade)
-			{
-				if (Main.rand.NextBool(20))
-				{
-					Vector2 circle = Main.rand.NextVector2Circular(50, 50);
-					Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + circle, Vector2.Zero, ModContent.ProjectileType<GenericBlackSwordProjectile>(), (int)(Projectile.damage * .5f), 0, Projectile.owner);
-				}
-			}
+
 		}
 		public override void OnKill(int timeLeft)
 		{
@@ -396,46 +418,39 @@ namespace CCMod.Content.Items.Weapons.Melee
 		}
 		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			if (player.GetModPlayer<GenericBlackSwordPlayer>().VoidBladeProtection)
+			if (Projectile.damage > 10)
 			{
-				player.GetModPlayer<GenericBlackSwordPlayer>().VoidCount++;
+				Projectile.damage = (int)(Projectile.damage * .95f);
 			}
-
+			else
+			{
+				Projectile.damage = 10;
+			}
+			Projectile.velocity *= .98f;
+			Main.player[Projectile.owner].GetModPlayer<GenericBlackSwordPlayer>().VoidCount++;
 			target.immune[Projectile.owner] = 7;
 		}
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Main.instance.LoadProjectile(Projectile.type);
+			Main.instance.LoadProjectile(Type);
 			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
-
+			float percentageAlpha = Math.Clamp(Projectile.alpha / 255f, 0, 1f);
 			Vector2 origin = new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f);
 			for (int k = 1; k < Projectile.oldPos.Length + 1; k++)
 			{
 				Vector2 drawPos = Projectile.oldPos[k - 1] - Main.screenPosition + origin + new Vector2(Projectile.gfxOffY);
 				Color color = new Color(0, 0, 0, 255 / k);
-				Main.EntitySpriteDraw(texture, drawPos, null, color, Projectile.rotation, origin, Projectile.scale, SpriteEffects.None, 0);
+				Main.EntitySpriteDraw(texture, drawPos, null, color * percentageAlpha, Projectile.rotation, origin, Projectile.scale, SpriteEffects.None, 0);
 			}
 
-			return true;
+			return false;
 		}
 	}
 	internal class GenericBlackSwordPlayer : ModPlayer
 	{
 		public int VoidCount = 0;
-		public int HowDIDyouFigureThatOut = 0;
 		public bool YouGotHitLMAO = false;
 
-		public bool VoidSlash = false;
-		public bool VoidSlashUpgrade = false;
-		public bool VoidBladeProtection = false;
-		public bool VoidBladeProtectionUpgrade = false;
-		public override void ResetEffects()
-		{
-			VoidSlash = NPC.downedBoss2;
-			VoidSlashUpgrade = NPC.downedBoss3;
-			VoidBladeProtection = NPC.downedMechBossAny;
-			VoidBladeProtectionUpgrade = NPC.downedPlantBoss;
-		}
 		public override void PostUpdate()
 		{
 			if (VoidCount >= 10)
@@ -443,11 +458,6 @@ namespace CCMod.Content.Items.Weapons.Melee
 				if (Player.ownedProjectileCounts[ModContent.ProjectileType<GenericBlackSwordProjectileBlade>()] < 1)
 				{
 					int PostUpdateDamage = Player.HeldItem.damage;
-					if (HowDIDyouFigureThatOut >= 1 || Player.name == "LowQualityTrashXinim")
-					{
-						PostUpdateDamage *= 10;
-					}
-
 					YouGotHitLMAO = false;
 					for (int i = 0; i < 5; i++)
 					{
@@ -456,8 +466,7 @@ namespace CCMod.Content.Items.Weapons.Melee
 				}
 			}
 		}
-
-		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)/* tModPorter If you don't need the Projectile, consider using OnHitNPC instead */
+		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			if (proj.type == ModContent.ProjectileType<GenericBlackSwordProjectile>() || proj.type == ModContent.ProjectileType<GenericBlackSwordProjectileBlade>())
 			{
@@ -470,133 +479,10 @@ namespace CCMod.Content.Items.Weapons.Melee
 			}
 		}
 
-		public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
-		{
-			if ((HowDIDyouFigureThatOut >= 1 || Player.name == "LowQualityTrashXinim") && item.type == ModContent.ItemType<GenericBlackSword>())
-			{
-				if (NPC.downedBoss2)
-				{
-					damage += 1;
-				}
-
-				if (NPC.downedBoss3)
-				{
-					damage += 1;
-				}
-
-				if (Main.hardMode)
-				{
-					damage += 3;
-				}
-
-				if (NPC.downedMechBossAny)
-				{
-					damage += 1;
-				}
-
-				if (NPC.downedPlantBoss)
-				{
-					damage += 2;
-				}
-
-				if (NPC.downedGolemBoss)
-				{
-					damage += 3;
-				}
-
-				if (NPC.downedMoonlord)
-				{
-					damage += 5;
-				}
-			}
-		}
-
 		public override void OnHurt(Player.HurtInfo info)
 		{
 			VoidCount = 0;
 			YouGotHitLMAO = true;
-		}
-
-		public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
-		{
-			ModPacket packet = Mod.GetPacket();
-			packet.Write((byte)CCMod.MessageType.GenericBlackSwordPlayer);
-			packet.Write((byte)Player.whoAmI);
-			packet.Write(HowDIDyouFigureThatOut);
-			packet.Send(toWho, fromWho);
-		}
-
-		public void ReceivePlayerSync(BinaryReader reader)
-		{
-			HowDIDyouFigureThatOut = reader.ReadByte();
-		}
-
-		public override void CopyClientState(ModPlayer clientClone)/* tModPorter Suggestion: Replace Item.Clone usages with Item.CopyNetStateTo */
-		{
-			GenericBlackSwordPlayer clone = clientClone as GenericBlackSwordPlayer;
-			clone.HowDIDyouFigureThatOut = HowDIDyouFigureThatOut;
-		}
-
-		public override void SendClientChanges(ModPlayer clientPlayer)
-		{
-			GenericBlackSwordPlayer clone = clientPlayer as GenericBlackSwordPlayer;
-
-			if (HowDIDyouFigureThatOut != clone.HowDIDyouFigureThatOut)
-				SyncPlayer(toWho: -1, fromWho: Main.myPlayer, newPlayer: false);
-		}
-
-		public override void SaveData(TagCompound tag)
-		{
-			tag["HowDIDyouFigureThatOut"] = HowDIDyouFigureThatOut;
-		}
-
-		public override void LoadData(TagCompound tag)
-		{
-			HowDIDyouFigureThatOut = (int)tag["HowDIDyouFigureThatOut"];
-		}
-	}
-
-	public class DropGenericBlackSword : GlobalNPC
-	{
-		public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
-		{
-			if (npc.type == NPCID.EyeofCthulhu)
-			{
-				npcLoot.Add(ItemDropRule.ByCondition(new GenericBlackSwordConditionRule(), ModContent.ItemType<GenericBlackSword>()));
-			}
-		}
-
-		public override void OnKill(NPC npc)
-		{
-			Player player = Main.LocalPlayer;
-			if (player.ZoneGraveyard && player.ZoneUnderworldHeight && npc.type == NPCID.EyeofCthulhu && Main.masterMode)
-			{
-				player.GetModPlayer<GenericBlackSwordPlayer>().HowDIDyouFigureThatOut++;//Don't ask me why this is set to int, bool didn't work
-			}
-		}
-	}
-
-	public class GenericBlackSwordConditionRule : IItemDropRuleCondition
-	{
-		public bool CanDrop(DropAttemptInfo info)
-		{
-			if (!info.IsInSimulation)
-			{
-				return
-					info.player.ZoneGraveyard;
-			}
-
-			return false;
-		}
-
-		public bool CanShowItemDropInUI()
-		{
-			return true;
-		}
-
-		public string GetConditionDescription()
-		{
-			return "Beat Eye of Cthulhu in Graveyard";
 		}
 	}
 }

@@ -7,62 +7,28 @@ using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using CCMod.Common.Attributes;
+using CCMod.Content.Items.Weapons.Ranged.Shuriken;
 
 namespace CCMod.Content.Items.Weapons.Ranged.DemonicShuriken
 {
 	[CodedBy("LowQualityTrash-Xinim")]
 	[SpritedBy("LowQualityTrash-Xinim")]
-	public class DemonicShuriken : ModItem
+	public class DemonicShuriken : BaseShurikenWeapon
 	{
 		public override void SetStaticDefaults()
 		{
-			/* Tooltip.SetDefault("Ashes Away" +
-				"\nShoot out a shuriken that spawn out 3 to 7 Shadow Spirit to attack many enemies" +
-				"\nAlt click to throw out a faster Shuriken that spawn out 4 scythes that home in to enemy for a moment" +
-				"\nafter that will be affect by gravity and will spawn out 4 shards"); */
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
-
-		public override void SetDefaults()
+		public override void SetDefaultShuriken()
 		{
-			Item.damage = 15;
-			Item.DamageType = DamageClass.Ranged;
-			Item.useStyle = ItemUseStyleID.Swing;
-			Item.noMelee = true;
-			Item.noUseGraphic = true;
-			Item.autoReuse = true;
-			Item.width = 42;
-			Item.height = 42;
-			Item.useTime = 40;
-			Item.useAnimation = 40;
-			Item.knockBack = 2.5f;
+			SetDefaultWeapon(42, 42, 15, 2.5f, 40, 40, ModContent.ProjectileType<DemonicShurikenProjectile>(), 10f);
 			Item.value = Item.sellPrice(gold: 1, silver: 50);
 			Item.rare = ItemRarityID.Blue;
-			Item.shoot = ModContent.ProjectileType<DemonicShurikenProjectile>();
-			Item.shootSpeed = 10f;
 		}
 
 		public override bool AltFunctionUse(Player player)
 		{
 			return true;
-		}
-
-		public override bool CanUseItem(Player player)
-		{
-			if (player.altFunctionUse == 2)
-			{
-				Item.useTime = 35;
-				Item.useAnimation = 35;
-				Item.shootSpeed = 15f;
-			}
-			else
-			{
-				Item.useAnimation = 20;
-				Item.useTime = 20;
-				Item.shootSpeed = 10f;
-			}
-
-			return base.CanUseItem(player);
 		}
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
@@ -80,8 +46,8 @@ namespace CCMod.Content.Items.Weapons.Ranged.DemonicShuriken
 
 		public override void AddRecipes()
 		{
-			CreateRecipe()
-			.AddIngredient(ItemID.DemoniteBar, 18)
+			CreateRecipe(50)
+			.AddIngredient(ItemID.DemoniteBar, 1)
 			.AddTile(TileID.Anvils)
 			.Register();
 		}
@@ -98,8 +64,7 @@ namespace CCMod.Content.Items.Weapons.Ranged.DemonicShuriken
 
 		public override void SetDefaults()
 		{
-			Projectile.width = 42;
-			Projectile.height = 42;
+			Projectile.width = Projectile.height = 42;
 			Projectile.aiStyle = 2;
 			Projectile.friendly = true;
 			Projectile.tileCollide = true;
@@ -139,6 +104,11 @@ namespace CCMod.Content.Items.Weapons.Ranged.DemonicShuriken
 	}
 	public class DemonicShurikenSecondProjectile : ModProjectile
 	{
+		public override void SetStaticDefaults()
+		{
+			ProjectileID.Sets.TrailCacheLength[Type] = 10;
+			ProjectileID.Sets.TrailingMode[Type] = 2;
+		}
 		public override string Texture => CCModTool.GetSameTextureAs<DemonicShuriken>();
 		public override void SetDefaults()
 		{
@@ -176,6 +146,11 @@ namespace CCMod.Content.Items.Weapons.Ranged.DemonicShuriken
 				float speedY = Main.rand.Next(-1, 3) + Projectile.velocity.Y;
 				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position.X + 21, Projectile.position.Y + 21, speedX, speedY, ModContent.ProjectileType<DemonicShurikenLeftOverProjectile>(), 12, 2f, Projectile.owner);
 			}
+		}
+		public override bool PreDraw(ref Color lightColor)
+		{
+			Projectile.DrawTrail(lightColor * 0.2f);
+			return true;
 		}
 	}
 

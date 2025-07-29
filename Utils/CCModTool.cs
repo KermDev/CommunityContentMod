@@ -42,5 +42,6 @@ namespace CCMod.Utils
 				maxDistanceDouble = maxDistance * maxDistance;
 			return DistanceX * DistanceX + DistanceY * DistanceY < maxDistanceDouble;
 		}
+		public static int CountDown(int timer, int timeDecrease = 1, int maxValue = 999999) => Math.Clamp(timer - timeDecrease, 0, maxValue);
 	}
 }
